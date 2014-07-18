@@ -12,11 +12,6 @@ TodoItem.prototype = {
       this.completedAt = new Date();
     },
 
-    //doing nothing
-    delete: function() {
-      console.log(this);
-    },
-
     createTodoLi: function(id) {
       var completeButton = $('<button>').text('Finished');
       completeButton.attr("data-id", id);
@@ -27,8 +22,9 @@ TodoItem.prototype = {
 
       var newItem = $('<li>').text(this.title  + ' -created- ' + this.createdAt);
       newItem.attr("data-id", id);
-   //   newItem.attr("data-time", this.createdAt);
       newItem.attr("data-status", this.done);
+      newItem.attr('data-date', this.createdAt);
+      newItem.attr('data-name', this.title);
       newItem.append(completeButton);
       newItem.append(deleteButton);
 
@@ -41,8 +37,9 @@ TodoItem.prototype = {
       deleteButton.attr("class", 'delete');
       var newItem = $('<li>').text(this.title + ' -completed- ' + this.completedAt);
       newItem.attr("data-id", id);
-   //   newItem.attr("data-time", this.createdAt);
       newItem.attr("data-status", this.done);
+      newItem.attr('data-date', this.completedAt);
+      newItem.attr('data-name', this.title);
       newItem.append(deleteButton);
 
       return newItem;
