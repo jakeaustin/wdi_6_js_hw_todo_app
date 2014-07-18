@@ -1,3 +1,8 @@
+// needs default sorted by date state
+// needs to re-sort with every added / completed item
+//
+
+
 var TodoApp = {
   initialize: function() {
     this.todos = [];
@@ -7,8 +12,6 @@ var TodoApp = {
     $('#todones-list').on('click', 'li .delete', TodoApp.deleteItem);
     $('.create-sort').click(TodoApp.sortByDate);
     $('.name-sort').click(TodoApp.sortByName);
-
-    $('.name-sort').click();
   },
 
   deleteItem: function(event) {
@@ -43,7 +46,6 @@ var TodoApp = {
 
   sortByDate: function(event) {
     event.preventDefault();
-    //this is a button, want it to be the ol
     var list = $(this).parent();
     var items = list.children('li');
 
@@ -68,7 +70,6 @@ var TodoApp = {
 
   sortByName: function(event) {
     event.preventDefault();
-    //stuff....
     var list = $(this).parent();
     var items = list.children('li');
 
@@ -77,7 +78,6 @@ var TodoApp = {
 
     //remove all the children
 
-    //create the children (createTodoLI or createTodoneLi)
     list.children('li').remove();
 
     items.sort(function(a, b) {
