@@ -18,12 +18,16 @@ var TodoApp = {
   createTodo:  function(event) {
       event.preventDefault();
 
-      var userIn = $(this).find('input').val();
-      var id = TodoApp.todos.length;
-      var newTodo = new TodoItem(userIn);
+      if ( $.trim( $(this).find('input').val() ) === '' )
+        alert('input is blank');
+      else {
+        var userIn = $(this).find('input').val();
+        var id = TodoApp.todos.length;
+        var newTodo = new TodoItem(userIn);
 
-      $('#todos-list').append(newTodo.createLi(id));
-      TodoApp.todos.push(newTodo);
+        $('#todos-list').append(newTodo.createLi(id));
+        TodoApp.todos.push(newTodo);
+      }
    },
 
 };

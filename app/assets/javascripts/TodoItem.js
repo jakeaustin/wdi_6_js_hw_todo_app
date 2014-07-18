@@ -1,8 +1,8 @@
 var TodoItem = function(title){
-  if(title === "") {throw new Error('cannot have blank todo');}
+  //if(title === "") {throw new Error('cannot have blank todo');}
   this.done = false;
   this.title = title;
-  this.when = Date.now();
+  this.createdAt = Date.now();
 };
 
 TodoItem.prototype = {
@@ -29,7 +29,7 @@ TodoItem.prototype = {
 
       var newItem = $('<li>').text(this.title);
       newItem.attr("data-id", id);
-      newItem.attr("data-time", this.when);
+   //   newItem.attr("data-time", this.createdAt);
       newItem.attr("data-status", this.done);
       newItem.append(completeButton);
       newItem.append(deleteButton);
