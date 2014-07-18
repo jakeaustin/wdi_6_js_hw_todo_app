@@ -1,4 +1,5 @@
 var TodoItem = function(title){
+  if(title === "") {throw new Error('cannot have blank todo');}
   this.done = false;
   this.title = title;
   this.when = Date.now();
