@@ -1,40 +1,30 @@
 var TodoApp = {
   initialize: function() {
     this.todos = [];
-    this.todones = [];
-      $('#todo-form').submit(this.createTodo);
+    $('#todo-form').submit(TodoApp.createTodo);
+    $('#todos-list').on('click', 'li', TodoApp.completeItem);
   },
-  createTodo: function(event) {
+
+  completeItem: function(event) {
     event.preventDefault();
-    var userIn = $(this).find('input').val();
-    var time = new Date();
-    var finished = false;
+    TodoApp.todos[$(this).attr('data-id')].complete();
 
+    var newItem = TodoApp.todos[$(this).attr('data-id')].createLi($(this).attr('data-id'));
+    $('#todones-list').append(newItem);
+    console.log($(this));
+    $(this).remove();
+  },
 
-    //sets done to true, moves item into todones list
-    //does NOT remove item from todo list
-    //items need coplete & delete link accompany in li
-    var complete = function() {
-      this.done = true;
-      TodoApp.todones.push(this);
-      var newItem = $('<li>').text(this.what);
-      $('#todones-list').append(newItem);
+  createTodo:  function(event) {
+      event.preventDefault();
 
-      TodoApp.todos.splice(TodoApp.todos.indexOf(this.what), 1);
-    };
+      var userIn = $(this).find('input').val();
+      var id = TodoApp.todos.length;
+      var newTodo = new TodoItem(userIn);
 
-    //doing nothing
-    var _delete = function() {
-      console.log(this);
-    };
-
-    //items need coplete & delete link accompany in li
-    var newTodo = { what: userIn, when: time, done: finished, complete: complete };
-    var newItem = $('<li>').text(newTodo.what);
-    $('#todos-list').append(newItem);
-
-    TodoApp.todos.push(newTodo);
-   }
+      $('#todos-list').append(newTodo.createLi(id));
+      TodoApp.todos.push(newTodo);
+   },
 
 };
 
